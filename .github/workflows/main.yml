@@ -31,47 +31,10 @@ jobs:
           if [ -d "build" ]; then
             echo "Build successful"
             echo "::set-output name=status::success"
+            echo "::set-output name=conclusion::success"
           else
             echo "Build failed"
             echo "::set-output name=status::failure"
+            echo "::set-output name=conclusion::failure"
             exit 1
           fi
-
-  report_status:
-    needs: build
-    runs-on: ubuntu-latest
-    if: always()
-    steps:
-      - name: Report status
-        uses: actions/github-script@v5
-        with:
-          script: |
-            if ("${{ needs.build.outputs.status }}" === "failure") {
-              github.rest.checks.create({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                name: 'Build Status',
-                head_sha: context.payload.pull_request.head.sha,
-                status: 'completed',
-                conclusion: 'failure',
-                output: {
-                  title: 'Build failed',
-                  summary: 'The build process failed. Please fix the issues before merging.',
-                },
-              });
-              core.setFailed('Build failed. Pull request cannot be merged.');
-            }
-            else {
-              core.setOutput('build_status', 'success');
-            }
-
-  merge_pull_request:
-    needs: [build, report_status]
-    runs-on: ubuntu-latest
-    if: always() && needs.report_status.outputs.build_status == 'success' && github.event.pull_request.merged
-    steps:
-      - name: Merge pull request
-        uses: pullreminders/merge-action@v2
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          merge_method: squash
