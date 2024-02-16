@@ -67,12 +67,11 @@ jobs:
 
   merge_pull_request:
     needs: [build, report_status]
-    if: always() && needs.report_status.outputs.build_status == 'success'
     runs-on: ubuntu-latest
+    if: always() && needs.report_status.outputs.build_status == 'success' && github.event.pull_request.merged
     steps:
       - name: Merge pull request
         uses: pullreminders/merge-action@v2
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           merge_method: squash
-          strict: true
