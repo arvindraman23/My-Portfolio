@@ -4,6 +4,7 @@ on:
   pull_request:
     branches:
       - main
+    types: [closed]
 
 jobs:
   build:
@@ -25,10 +26,38 @@ jobs:
         run: npm run build
 
       - name: Check build status
+        id: check_build
         run: |
           if [ -d "build" ]; then
             echo "Build successful"
+            echo "::set-output name=status::success"
           else
             echo "Build failed"
+            echo "::set-output name=status::failure"
             exit 1
           fi
+
+  report_status:
+    needs: build
+    runs-on: ubuntu-latest
+    if: always()
+    steps:
+      - name: Report status
+        uses: actions/github-script@v5
+        with:
+          script: |
+            if ("${{ needs.build.outputs.status }}" === "failure") {
+              github.rest.checks.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                name: 'Build Status',
+                head_sha: context.payload.pull_request.head.sha,
+                status: 'completed',
+                conclusion: 'failure',
+                output: {
+                  title: 'Build failed',
+                  summary: 'The build process failed. Please fix the issues before merging.',
+                },
+              });
+              core.setFailed('Build failed. Pull request cannot be merged.');
+            }
