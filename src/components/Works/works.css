@@ -47,16 +47,21 @@
 .worksImgContainer {
     position: relative;
     cursor: pointer;
-    border: 2px solid white; /* Add white border */
+    border: 2px solid yellow; /* Add white border */
     border-radius: 1rem; /* Add rounded corners */
     overflow: hidden; /* Hide overflow to round corners properly */
-    width: calc(33.33% - 1rem); /* Set width to 33.33% minus margins */
+    width: calc(33.33% - 1.5rem); /* Set width to 33.33% minus margins */
     margin: 0.5rem 0.25rem; /* Add vertical and horizontal margin */
+    height: 300px;
+    background-color: white;
+    margin-top: 20px;
+    margin-bottom: 5px;
 }
 
 .worksImg {
     width: 100%;
-    height: auto;
+    height: 250px;
+    margin-top: 25px;
 }
 
 .projectTitle {
@@ -95,8 +100,8 @@
 .projectDescription {
     font-size: 1rem;
     color: white;
-    margin-bottom: 1rem;
-    max-width: 90%;
+    margin-bottom: 3.5rem;
+    max-width: 94%;
     text-align: center;
 }
 
