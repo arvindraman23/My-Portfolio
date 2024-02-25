@@ -9,9 +9,11 @@ const Intro = () => {
         <section id='intro'>
             <div className='introContent'>
                 <span className='hello'>Hello,</span>
-                <span className='introText'>I'm <span className='introName'>Arvind</span> <br />iOS Developer</span>
-                <p className='introPara'> I'm a skilled iOS Developer with <br />3 years of industry experience.</p>
-                <Link><button className='btn'><img src={btnImg} alt='Hire Me' className='btnImg'/> Hire Me</button></Link>
+                <span className='introText'>I'm <span className='introName'>Arvind Raman</span> <br />Software Engineer | iOS Developer</span>
+                <p className='introPara'> I'm a skilled Software Engineer with 3 years of hands-on experience <br />in architecting applications. Proficient at crafting innovative solutions <br />that elevate user experience and drive business growth.</p>
+                <Link><button className='btn' onClick={() => {
+                document.getElementById('contact').scrollIntoView({behavior: 'smooth'});
+                }}><img src={btnImg} alt='Hire Me' className='btnImg'/> Hire Me</button></Link>
             </div>
             <img src={bg} alt='Profile' className='bg' />
         </section>

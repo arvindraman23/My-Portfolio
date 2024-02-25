@@ -6,7 +6,6 @@ import Portfolio3 from '../../assets/portfolio-3.png';
 import Portfolio4 from '../../assets/portfolio-4.png';
 import Portfolio5 from '../../assets/portfolio-5.png';
 import Portfolio6 from '../../assets/portfolio-6.png';
-import { Link } from 'react-router-dom';
 
 const worksData = [
     {
@@ -54,7 +53,7 @@ const worksData = [
 ];
 
 const Works = () => {
-    const [redirectUrl, setRedirectUrl] = useState('');
+    const [setRedirectUrl] = useState('');
 
     const handleClick = (url) => {
         setRedirectUrl(url);
@@ -75,7 +74,7 @@ const Works = () => {
         //     <button className="worksBtn">See More</button>
         // </section>
         <section id="works">
-            <h2 className="workstitle">My Portfolio</h2>
+            <h2 className="worksTitle">My Portfolio</h2>
             <span className="worksDesc">My educational background, technical expertise, and professional experiences have prepared me to excel in this role. My most recent position as an iOS Developer at Bosch Global Software Technologies allowed me to work on a significant project, "MeasureOn," where I was responsible for iOS app development.</span>
             <div className="worksImgs">
                 {worksData.map((project) => (
