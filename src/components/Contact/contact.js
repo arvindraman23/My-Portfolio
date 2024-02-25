@@ -18,6 +18,7 @@ const Contact = () => {
                 console.log(error.text);
         });
     };
+    
     return (
         <section id="contactPage">
             <div id="contact">
@@ -29,8 +30,12 @@ const Contact = () => {
                     <textarea className="msg" name="message" rows="5" placeholder="Your Message"></textarea>
                     <button type="submit" value='Send' className="submitBtn">Submit</button>
                     <div className="links">
-                        <img src={LinkedinIcon} alt="Linkedin" className="link" />
-                        <img src={GithubIcon} alt="Github" className="link" />
+                        <a href="https://www.linkedin.com/in/raman-arvind/" target="_blank" rel="noopener noreferrer">
+                            <img src={LinkedinIcon} alt="Linkedin" className="link" />
+                        </a>
+                        <a href="https://github.com/arvindraman23" target="_blank" rel="noopener noreferrer">
+                            <img src={GithubIcon} alt="Github" className="link" />
+                        </a>
                     </div>
                 </form>
             </div>
