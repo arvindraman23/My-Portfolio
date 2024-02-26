@@ -37,10 +37,11 @@
 .worksImgs {
     display: flex;
     align-items: center;
-    justify-content: space-evenly; /* Distribute space evenly between items */
-    flex-wrap: wrap;
-    width: 95vw;
-    max-width: 65rem;
+    justify-content: flex-start;
+    flex-wrap: nowrap; /* Prevent items from wrapping */
+    overflow-x: auto; /* Enable horizontal scrolling */
+    width: 100%; /* Set full width */
+    max-width: 65rem; /* Limit maximum width */
     padding: 0 1rem; /* Add padding to the sides */
 }
 
@@ -56,6 +57,8 @@
     background-color: white;
     margin-top: 20px;
     margin-bottom: 5px;
+    flex: 0 0 auto; /* Maintain original width */
+    min-width: 15rem;
 }
 
 .worksImg {
@@ -108,5 +111,14 @@
 @media screen and (max-width:585px) {
     .worksImg {
         height: 48vw;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .worksImgs {
+        justify-content: space-evenly; 
+        flex-wrap: wrap;
+        width: 95vw;
+        max-width: 65rem;
     }
 }
